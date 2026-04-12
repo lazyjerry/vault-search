@@ -5,14 +5,22 @@
   "main": "main.js",
   "scripts": {
     "dev": "node esbuild.config.mjs",
-    "build": "node esbuild.config.mjs production"
+    "build": "node esbuild.config.mjs production",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint \"src/**/*.ts\"",
+    "lint:fix": "npm run lint -- --fix",
+    "version": "node scripts/sync-version.js && git add manifest.json"
   },
   "keywords": ["obsidian", "semantic-search", "embeddings"],
   "author": "Jacob Mei",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^22.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.30.0",
+    "@typescript-eslint/parser": "^8.30.0",
     "esbuild": "^0.25.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "obsidian": "latest",
     "typescript": "^5.7.0"
   }
