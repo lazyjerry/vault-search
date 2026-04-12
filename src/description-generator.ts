@@ -1,7 +1,8 @@
 import { Notice, requestUrl, TFile } from "obsidian";
+
+import { t } from "./i18n";
 import type VaultSearchPlugin from "./main";
 import { checkOllama, formatLocalDateTime, stripFrontmatter, validateServerUrl } from "./utils";
-import { t } from "./i18n";
 
 interface DescAction {
     path: string;

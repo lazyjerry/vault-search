@@ -1,18 +1,20 @@
 import { normalizePath, Notice, Plugin, TFile } from "obsidian";
-import {
-    VaultSearchData,
-    VaultSearchDataLegacy,
-    VaultSearchSettings,
-    VaultSearchIndex,
-    DEFAULT_SETTINGS,
-} from "./types";
-import { Indexer } from "./indexer";
-import { SearchModal } from "./searcher";
-import { SearchView, VIEW_TYPE_SEARCH } from "./search-view";
-import { VaultSearchSettingTab } from "./settings";
-import { searchNoteScore } from "./utils";
+
 import { DescriptionGenerator } from "./description-generator";
 import { t } from "./i18n";
+import { Indexer } from "./indexer";
+import { SearchView, VIEW_TYPE_SEARCH } from "./search-view";
+import { SearchModal } from "./searcher";
+import { VaultSearchSettingTab } from "./settings";
+import type {
+    VaultSearchData,
+    VaultSearchDataLegacy,
+    VaultSearchIndex,
+    VaultSearchSettings} from "./types";
+import {
+    DEFAULT_SETTINGS
+} from "./types";
+import { searchNoteScore } from "./utils";
 
 export default class VaultSearchPlugin extends Plugin {
     settings!: VaultSearchSettings;

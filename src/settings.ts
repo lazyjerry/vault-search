@@ -1,7 +1,9 @@
-import { App, PluginSettingTab, Setting } from "obsidian";
+import type { App} from "obsidian";
+import { PluginSettingTab, Setting } from "obsidian";
+
+import { t } from "./i18n";
 import type VaultSearchPlugin from "./main";
 import { fetchOllamaModels } from "./utils";
-import { t } from "./i18n";
 
 export class VaultSearchSettingTab extends PluginSettingTab {
     plugin: VaultSearchPlugin;

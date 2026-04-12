@@ -1,4 +1,5 @@
-import { ItemView, Menu, Notice, TFile, WorkspaceLeaf } from "obsidian";
+import type { WorkspaceLeaf } from "obsidian";
+import { ItemView, Menu, Notice, TFile } from "obsidian";
 
 // Obsidian's dragManager is not in public types but exists at runtime
 declare module "obsidian" {
@@ -9,11 +10,11 @@ declare module "obsidian" {
         };
     }
 }
-import type VaultSearchPlugin from "./main";
-import { SearchResult } from "./types";
-import { checkOllama, discoverForNote, embedText, formatLocalDateTime, getContentPreview, globalDiscover, rankNotes, renderResultItem } from "./utils";
 import { t } from "./i18n";
+import type VaultSearchPlugin from "./main";
 import { expandQuery } from "./synonyms";
+import type { SearchResult } from "./types";
+import { checkOllama, discoverForNote, embedText, formatLocalDateTime, getContentPreview, globalDiscover, rankNotes, renderResultItem } from "./utils";
 
 export const VIEW_TYPE_SEARCH = "vault-search-view";
 

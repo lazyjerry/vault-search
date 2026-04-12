@@ -1,8 +1,10 @@
-import { Notice, TFile } from "obsidian";
-import type VaultSearchPlugin from "./main";
-import { NoteEntry } from "./types";
-import { checkOllama, embedTexts, splitChunks, stripFrontmatter } from "./utils";
+import type { TFile } from "obsidian";
+import { Notice } from "obsidian";
+
 import { t } from "./i18n";
+import type VaultSearchPlugin from "./main";
+import type { NoteEntry } from "./types";
+import { checkOllama, embedTexts, splitChunks, stripFrontmatter } from "./utils";
 
 const BATCH_SIZE = 5;
 

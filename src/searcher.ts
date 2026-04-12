@@ -1,9 +1,10 @@
 import { SuggestModal, TFile } from "obsidian";
-import type VaultSearchPlugin from "./main";
-import { SearchResult } from "./types";
-import { checkOllama, embedText, rankNotes, renderResultItem } from "./utils";
+
 import { t } from "./i18n";
+import type VaultSearchPlugin from "./main";
 import { expandQuery } from "./synonyms";
+import type { SearchResult } from "./types";
+import { checkOllama, embedText, rankNotes, renderResultItem } from "./utils";
 
 export class SearchModal extends SuggestModal<SearchResult> {
     private plugin: VaultSearchPlugin;

@@ -1,4 +1,6 @@
-import { App, requestUrl, TFile } from "obsidian";
+import type { App} from "obsidian";
+import { requestUrl, TFile } from "obsidian";
+
 import type { ApiFormat } from "./types";
 
 export interface OllamaModel {
