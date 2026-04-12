@@ -1,0 +1,25 @@
+# 自動關閉閒置 Issue
+# 觸發時機：每日 UTC 00:00 排程執行，也可從 Actions 頁面手動觸發
+# 規則：7 天無活動 → 標記 stale → 再 7 天仍無活動 → 自動關閉
+# 豁免：帶有 pinned、security、bug label 的 Issue 不受影響
+name: Close stale issues
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 每日 UTC 00:00 執行
+  workflow_dispatch: # 允許從 Actions 頁面手動觸發
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write # 需要寫入權限才能標記和關閉 Issue
+    steps:
+      - uses: actions/stale@v9
+        with:
+          days-before-stale: 7 # 7 天無活動後標記為 stale
+          days-before-close: 7 # 標記 stale 後再 7 天無活動則關閉
+          stale-issue-message: 'This issue has been inactive for 7 days and will be closed in 7 days if no further activity occurs.'
+          close-issue-message: 'Closed due to 14 days of inactivity.'
+          stale-issue-label: 'stale'
+          exempt-issue-labels: 'pinned,security,bug' # 這些 label 的 Issue 不會被自動關閉

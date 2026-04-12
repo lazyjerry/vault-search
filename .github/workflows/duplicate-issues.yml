@@ -1,0 +1,25 @@
+# 重複 Issue 偵測
+# 觸發時機：Issue 被建立或編輯時
+# 執行內容：比對現有 Issue 的相似度，超過 60% 則自動留言提醒
+name: Potential Duplicates
+on:
+  issues:
+    types: [opened, edited]
+
+jobs:
+  check-duplicates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: wow-actions/potential-duplicates@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          threshold: 0.6 # 相似度門檻（0~1），0.6 表示 60% 以上即視為可能重複
+          state: all # 比對所有狀態的 Issue（open + closed）
+          label: possible-duplicate # 自動加上的 label 名稱
+          comment: >
+            Possible duplicates found:
+            {{#issues}}
+            - #{{number}} ({{similarity}}% similar): {{title}}
+            {{/issues}}
+
+            If one of these matches your issue, please add your details there instead.

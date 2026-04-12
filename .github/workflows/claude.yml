@@ -1,0 +1,54 @@
+# Claude 互動助手
+# 在 Issue 或 PR 的留言中提到 @claude 即可觸發
+# Claude 會根據留言內容自動執行對應任務
+# 需要在 repo Settings → Secrets → Actions 設定 CLAUDE_CODE_OAUTH_TOKEN
+name: Claude Code
+
+on:
+  issue_comment:
+    types: [created] # Issue 留言
+  pull_request_review_comment:
+    types: [created] # PR review 留言
+  issues:
+    types: [opened, assigned] # Issue 開啟或被指派
+  pull_request_review:
+    types: [submitted] # PR review 提交
+
+jobs:
+  claude:
+    # 僅在留言或內容中包含 @claude 時觸發
+    if: |
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')) ||
+      (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+      issues: read
+      id-token: write # Claude Code Action 需要此權限進行身份驗證
+      actions: read # 讓 Claude 能讀取 PR 上的 CI 執行結果
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Run Claude Code
+        id: claude
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+
+          # 允許 Claude 讀取 PR 上的 CI 執行結果
+          additional_permissions: |
+            actions: read
+
+          # 可選：自訂 prompt。若未指定，Claude 會依照留言中的指示執行
+          # prompt: '更新 PR 描述，加入變更摘要。'
+
+          # 可選：透過 claude_args 自訂行為與設定
+          # 參考：https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
+          # claude_args: '--allowed-tools Bash(gh pr:*)'
+

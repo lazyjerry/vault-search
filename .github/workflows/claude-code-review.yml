@@ -1,0 +1,57 @@
+# Claude 自動程式碼審查
+# 觸發方式：
+#   1. 在 PR 上加 "claude-review" label
+#   2. 到 Actions 頁面手動觸發 (workflow_dispatch)
+name: Claude Code Review
+
+on:
+  pull_request:
+    types: [labeled] # 僅在加上 label 時觸發
+  workflow_dispatch: # 允許從 Actions 頁面手動觸發
+
+jobs:
+  claude-review:
+    # 條件：手動觸發，或 PR 被加上 "claude-review" label
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' && github.event.label.name == 'claude-review')
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+      issues: read
+      id-token: write # Claude Code Action 需要此權限進行身份驗證
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Run Claude Code Review
+        id: claude-review
+        uses: anthropics/claude-code-action@v1
+        with:
+          # 需要在 repo Settings → Secrets → Actions 設定此 token
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            儲存庫：${{ github.repository }}
+            PR 編號：${{ github.event.pull_request.number }}
+
+            請審查這個 Pull Request，並針對以下面向提供回饋：
+            - 程式碼品質與最佳實踐
+            - 潛在的 bug 或問題
+            - 效能考量
+            - 安全性疑慮
+            - 測試覆蓋率
+
+            若儲存庫中有 CLAUDE.md，請以其中的風格與慣例作為參考依據。
+            請以建設性且有幫助的方式給予回饋，使用繁體中文回覆。
+
+            使用 `gh pr comment` 將審查結果以留言形式發布到 PR 上。
+
+          # 限制 Claude 僅能使用 gh CLI 的唯讀指令與留言功能
+          # 參考：https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
+          claude_args: '--allowed-tools "Bash(gh issue view:*),Bash(gh search:*),Bash(gh issue list:*),Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh pr list:*)"'
+
