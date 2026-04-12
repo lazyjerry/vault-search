@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Vault Search Obsidian Plugin — 快速安裝腳本
-# 用法: bash install.sh [vault_path]
-# 範例: bash install.sh ~/Documents/MyVault
+# 用法: bash install.sh [--] [vault_path]
+# 範例: bash install.sh -- ~/Documents/MyVault
 
 set -euo pipefail
 
@@ -26,6 +26,16 @@ done
 
 # --- 取得 Vault 路徑 ---
 if [[ $# -ge 1 ]]; then
+  # 支援以 -- 分隔選項與路徑參數
+  if [[ "${1:-}" == "--" ]]; then
+    shift
+  fi
+
+  if [[ $# -lt 1 ]]; then
+    error "缺少 Vault 路徑，請提供安裝路徑"
+  fi
+
+  # 允許未加引號的含空白路徑（會由多個參數組回原路徑）
   VAULT_PATH="$*"
 else
   echo "範例路徑："
@@ -34,6 +44,10 @@ else
   echo "  Windows: /c/Users/你的名稱/Documents/MyVault"
   read -rp "請輸入 Obsidian Vault 路徑: " VAULT_PATH
 fi
+
+# 容錯：若使用者在雙引號內手動加上 \ 空白或 \~，還原為正常路徑
+VAULT_PATH="${VAULT_PATH//\\ / }"
+VAULT_PATH="${VAULT_PATH//\\~/~}"
 
 # 展開 ~ 與環境變數
 VAULT_PATH="${VAULT_PATH/#\~/$HOME}"

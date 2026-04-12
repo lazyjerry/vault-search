@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <a href="./README.zh-TW.md">繁體中文</a>
+  English | <a href="./README_CN.md">简体中文</a> | <a href="./README_TW.md">繁體中文</a> | <a href="./README_JP.md">日本語</a> | <a href="./README_KR.md">한국어</a>
 </p>
 
 ---
@@ -85,6 +85,16 @@ No cloud services. No API keys. No subscription fees. Your notes never leave you
 - Obsidian desktop
 
 ## Installation
+
+### One-click install
+
+```bash
+# Interactive mode: script will ask for your vault path
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/notoriouslab/vault-search/main/install.sh)"
+
+# Or pass vault path directly
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/notoriouslab/vault-search/main/install.sh)" -- "/path/to/your/vault"
+```
 
 ### BRAT (recommended while pending community review)
 
