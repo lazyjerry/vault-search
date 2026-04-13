@@ -90,10 +90,10 @@ No cloud services. No API keys. No subscription fees. Your notes never leave you
 
 ```bash
 # Interactive mode: script will ask for your vault path
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/notoriouslab/vault-search/main/install.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/lazyjerry/vault-search/main/install.sh)"
 
 # Or pass vault path directly
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/notoriouslab/vault-search/main/install.sh)" -- "/path/to/your/vault"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/lazyjerry/vault-search/main/install.sh)" -- "/path/to/your/vault"
 ```
 
 ### BRAT (recommended while pending community review)

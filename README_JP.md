@@ -90,10 +90,10 @@
 
 ```bash
 # 対話モード: スクリプトが vault パスを確認します
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/notoriouslab/vault-search/main/install.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/lazyjerry/vault-search/main/install.sh)"
 
 # vault パスを直接指定する場合
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/notoriouslab/vault-search/main/install.sh)" -- "/path/to/your/vault"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/lazyjerry/vault-search/main/install.sh)" -- "/path/to/your/vault"
 ```
 
 ### BRAT（コミュニティ審査待ち期間の推奨）

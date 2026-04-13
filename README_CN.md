@@ -90,10 +90,10 @@
 
 ```bash
 # 交互模式：脚本会提示输入 vault 路径
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/notoriouslab/vault-search/main/install.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/lazyjerry/vault-search/main/install.sh)"
 
 # 或直接传入 vault 路径
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/notoriouslab/vault-search/main/install.sh)" -- "/path/to/your/vault"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/lazyjerry/vault-search/main/install.sh)" -- "/path/to/your/vault"
 ```
 
 ### BRAT（社区审核期间推荐）

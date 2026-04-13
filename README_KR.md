@@ -90,10 +90,10 @@
 
 ```bash
 # 대화형 모드: 스크립트가 vault 경로를 물어봅니다
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/notoriouslab/vault-search/main/install.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/lazyjerry/vault-search/main/install.sh)"
 
 # vault 경로를 직접 전달하는 경우
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/notoriouslab/vault-search/main/install.sh)" -- "/path/to/your/vault"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/lazyjerry/vault-search/main/install.sh)" -- "/path/to/your/vault"
 ```
 
 ### BRAT (커뮤니티 검토 대기 중 권장)

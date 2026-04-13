@@ -90,10 +90,10 @@
 
 ```bash
 # 互動模式：腳本會提示你輸入 vault 路徑
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/notoriouslab/vault-search/main/install.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/lazyjerry/vault-search/main/install.sh)"
 
 # 或直接帶入 vault 路徑
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/notoriouslab/vault-search/main/install.sh)" -- "/path/to/your/vault"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/lazyjerry/vault-search/main/install.sh)" -- "/path/to/your/vault"
 ```
 
 ### BRAT（社群審核中，推薦此方式安裝）
